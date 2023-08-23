@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ndcampadvanceteam.adapter.TodoRecyclerViewAdapter
 import com.example.ndcampadvanceteam.databinding.MainTodoFragmentBinding
 
-class MainTodoFragment : Fragment() {
+class TodoFragment : Fragment() {
     private val _binding: MainTodoFragmentBinding by lazy {
         MainTodoFragmentBinding.inflate(
             layoutInflater

@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private val mainFloatingButton: FloatingActionButton by lazy { binding.mainFloatingButton }
 
 
-    private val tabTitleList: Array<String> = arrayOf("Todo", "Bookmark")
+    private val tabTitleList: ArrayList<String> = arrayListOf("Todo", "Bookmark")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
