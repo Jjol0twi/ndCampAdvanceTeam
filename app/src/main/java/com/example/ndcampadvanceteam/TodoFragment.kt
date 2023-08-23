@@ -36,7 +36,4 @@ class TodoFragment : Fragment() {
             adapter = TodoRecyclerViewAdapter()
         }
     }
-
-    companion object {
-    }
 }
