@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+        mainFloatingButton.setOnClickListener{ mainFloatingButtonClickEvent() }
     }
+
+    private fun mainFloatingButtonClickEvent() {
+        
     }
 }
