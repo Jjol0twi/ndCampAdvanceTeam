@@ -17,16 +17,20 @@ class MainActivity : AppCompatActivity() {
     private val mainViewPager: ViewPager2 by lazy { binding.mainViewPager }
     private val mainFloatingButton: FloatingActionButton by lazy { binding.mainFloatingButton }
 
-    private val tabTitleList: ArrayList<String> = arrayListOf("Todo", "Bookmark")
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        mainViewPager.adapter = MainViewPagerAdapter(supportFragmentManager, lifecycle)
-        TabLayoutMediator(mainTabLayout, mainViewPager) { tab, pos ->
-            tab.text = tabTitleList[pos]
+        val mainViewPagerAdapter = MainViewPagerAdapter(supportFragmentManager, lifecycle)
+        mainViewPager.adapter = mainViewPagerAdapter    // connect adapter
+        TabLayoutMediator(mainTabLayout, mainViewPager) { tab, pos ->   // set tabLayout title
+            tab.text = getString(mainViewPagerAdapter.getTitleByIndex(pos))
         }.attach()
-        mainToolbar.title = "Camp"
+        mainToolbar.title = "Camp"  // set toolbar title
+        mainViewPagerChanged()
+        mainFloatingButton.setOnClickListener { mainFloatingButtonClickEvent() }
+    }
+
+    private fun mainViewPagerChanged() {
         mainViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
@@ -38,10 +42,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        mainFloatingButton.setOnClickListener{ mainFloatingButtonClickEvent() }
     }
 
     private fun mainFloatingButtonClickEvent() {
-        
+
     }
 }
