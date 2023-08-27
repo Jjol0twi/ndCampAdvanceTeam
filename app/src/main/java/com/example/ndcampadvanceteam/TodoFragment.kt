@@ -12,6 +12,10 @@ import com.example.ndcampadvanceteam.databinding.MainTodoFragmentBinding
 
 class TodoFragment : Fragment() {
 
+    companion object {
+        fun newInstance() = TodoFragment()
+    }
+
     private var _binding: MainTodoFragmentBinding? = null
     private val binding get() = _binding!!
     private val todoRecyclerView: RecyclerView by lazy { binding.mainTodoRecyclerView }
