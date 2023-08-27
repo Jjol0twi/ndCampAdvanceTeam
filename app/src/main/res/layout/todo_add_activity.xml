@@ -18,16 +18,21 @@
         android:id="@+id/todo_add_title_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/todo_add_toolbar"
+        android:layout_margin="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:hint="@string/todo_add_title_hint"
+        app:layout_constraintTop_toBottomOf="@id/todo_add_toolbar" />
 
     <EditText
         android:id="@+id/todo_add_content_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/todo_add_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/todo_add_title_edit"
+        android:hint="@string/todo_add_content_hint"
+        android:inputType="text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

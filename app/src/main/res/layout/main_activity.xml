@@ -32,7 +32,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_tabLayout" />
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/main_floatingButton"
         android:layout_width="wrap_content"
