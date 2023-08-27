@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NDCampAdvanceTeam</string>
-    <string name="todo_add_content_hint">내용</string>
     <string name="todo_add_title_hint">제목</string>
+    <string name="todo_add_content_hint">내용</string>
 </resources>
