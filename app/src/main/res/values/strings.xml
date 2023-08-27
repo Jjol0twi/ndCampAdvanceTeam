@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">NDCampAdvanceTeam</string>
     <string name="todo_add_content_hint">내용</string>
+    <string name="main_todo_title">Todo</string>
+    <string name="main_bookmark_title">Bookmark</string>
     <string name="todo_add_title_hint">제목</string>
 </resources>
