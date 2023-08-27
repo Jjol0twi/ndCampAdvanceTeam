@@ -28,5 +28,17 @@ class MainActivity : AppCompatActivity() {
             tab.text = tabTitleList[pos]
         }.attach()
         mainToolbar.title = "Camp"
+        mainViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                if (position == 0) {
+                    mainFloatingButton.show()
+                }
+                if (position == 1) {
+                    mainFloatingButton.hide()
+                }
+            }
+        })
+    }
     }
 }
