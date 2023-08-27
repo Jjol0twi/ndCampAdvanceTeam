@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
-    private val binding: MainActivityBinding by lazy { MainActivityBinding.inflate(layoutInflater) }
+    private lateinit var binding: MainActivityBinding
     private val mainToolbar: Toolbar by lazy { binding.mainToolbar }
     private val mainTabLayout: TabLayout by lazy { binding.mainTabLayout }
     private val mainViewPager: ViewPager2 by lazy { binding.mainViewPager }
@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding=MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val mainViewPagerAdapter = MainViewPagerAdapter(supportFragmentManager, lifecycle)
         mainViewPager.adapter = mainViewPagerAdapter    // connect adapter
