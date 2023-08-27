@@ -9,6 +9,10 @@ import com.example.ndcampadvanceteam.databinding.MainBookmarkFragmentBinding
 
 class BookmarkFragment : Fragment() {
 
+    companion object {
+        fun newInstance() = BookmarkFragment()
+    }
+
     private var _binding: MainBookmarkFragmentBinding? = null
     private val binding get() = _binding!!
 

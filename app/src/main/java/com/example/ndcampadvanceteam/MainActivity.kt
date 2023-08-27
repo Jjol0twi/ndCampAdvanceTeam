@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     private val mainViewPager: ViewPager2 by lazy { binding.mainViewPager }
     private val mainFloatingButton: FloatingActionButton by lazy { binding.mainFloatingButton }
 
-
     private val tabTitleList: ArrayList<String> = arrayListOf("Todo", "Bookmark")
 
     override fun onCreate(savedInstanceState: Bundle?) {
