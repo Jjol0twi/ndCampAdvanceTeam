@@ -32,4 +32,8 @@ class MainViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycl
         }
         return TodoFragment()
     }
+
+    fun getFragmentByIndex(position: Int): Fragment? {
+        return viewList[position].fragment
+    }
 }
