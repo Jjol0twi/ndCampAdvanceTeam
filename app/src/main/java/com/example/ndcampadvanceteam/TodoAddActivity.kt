@@ -14,6 +14,18 @@ class TodoAddActivity : AppCompatActivity() {
         binding = TodoAddActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setToolbar()
+        binding.todoAddSuccessButton.setOnClickListener { addTodoSuccess() }
+    }
+
+    private fun addTodoSuccess() {
+//        val intent = Intent(this@TodoAddActivity, MainActivity::class.java)
+        val intent = Intent()
+        intent.putExtra("title", binding.todoAddTitleEdit.text.toString())
+        intent.putExtra("content", binding.todoAddContentEdit.text.toString())
+        setResult(RESULT_OK, intent)
+        finish()
+    }
+
     private fun setToolbar() {
         setSupportActionBar(binding.todoAddToolbar)
         supportActionBar?.apply {
