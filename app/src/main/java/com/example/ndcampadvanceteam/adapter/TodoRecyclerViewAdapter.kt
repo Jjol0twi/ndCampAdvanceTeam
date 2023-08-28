@@ -7,10 +7,26 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ndcampadvanceteam.R
 import com.example.ndcampadvanceteam.databinding.TodoRecycleviewItemBinding
+import com.example.ndcampadvanceteam.model.TodoModel
 
 class TodoRecyclerViewAdapter :
     RecyclerView.Adapter<TodoRecyclerViewAdapter.TodoRecyclerViewHolder>() {
-    class TodoRecyclerViewHolder(private val binding : TodoRecycleviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    private val itemList = ArrayList<TodoModel>()
+
+//    fun addItems(items: List<TodoModel>){
+//        itemList.addAll(items)
+//        notifyDataSetChanged()
+//    }
+
+    fun addItem(title: String, content: String) {
+        itemList.add(TodoModel(title, content))
+        notifyDataSetChanged()
+    }
+
+
+    class TodoRecyclerViewHolder(binding: TodoRecycleviewItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val todoItemText: TextView = binding.todoItemText
         val todoItemSubText: TextView = binding.todoItemSubText
     }
