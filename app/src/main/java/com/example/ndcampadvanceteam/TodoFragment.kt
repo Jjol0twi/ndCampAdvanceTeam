@@ -43,6 +43,11 @@ class TodoFragment : Fragment() {
         _binding = null
     }
 
+    fun setItemData(title: String, content: String) {
+        todoRecyclerAdapter.addItem(title, content)
+    }
+
+
     private fun setRecyclerView(view: RecyclerView) {
         view.apply {
             layoutManager = LinearLayoutManager(context)
