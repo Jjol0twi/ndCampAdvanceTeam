@@ -37,10 +37,10 @@ class TodoRecyclerViewAdapter :
         )
     }
 
-    override fun getItemCount(): Int = 100
+    override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: TodoRecyclerViewHolder, position: Int) {
-//        holder.todoItemText.text = "test"
-//        holder.todoItemSubText.text = "hi"
+        holder.todoItemText.text = itemList[position].title
+        holder.todoItemSubText.text = itemList[position].content
     }
 }
