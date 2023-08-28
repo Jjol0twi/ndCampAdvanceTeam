@@ -19,6 +19,7 @@ class TodoFragment : Fragment() {
     private var _binding: MainTodoFragmentBinding? = null
     private val binding get() = _binding!!
     private val todoRecyclerView: RecyclerView by lazy { binding.mainTodoRecyclerView }
+    private val todoRecyclerAdapter by lazy { TodoRecyclerViewAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,7 @@ class TodoFragment : Fragment() {
     private fun setRecyclerView(view: RecyclerView) {
         view.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = TodoRecyclerViewAdapter()
+            adapter = todoRecyclerAdapter
         }
     }
 }
