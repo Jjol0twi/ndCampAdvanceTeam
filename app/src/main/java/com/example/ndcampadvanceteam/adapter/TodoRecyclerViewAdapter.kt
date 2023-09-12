@@ -21,26 +21,29 @@ class TodoRecyclerViewAdapter :
 
     fun addItem(title: String, content: String) {
         itemList.add(TodoModel(title, content))
-        notifyDataSetChanged()
+//        notifyDataSetChanged()
+        notifyItemInserted(itemList.size)
     }
 
 
-    class TodoRecyclerViewHolder(binding: TodoRecycleviewItemBinding) :
+    inner class TodoRecyclerViewHolder(private val binding: TodoRecycleviewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val todoItemText: TextView = binding.todoItemText
-        val todoItemSubText: TextView = binding.todoItemSubText
+        fun bind(data: TodoModel) = with(binding) {
+            todoItemText.text = data.title
+            todoItemSubText.text = data.content
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoRecyclerViewHolder {
         return TodoRecyclerViewHolder(
-            TodoRecycleviewItemBinding.inflate(LayoutInflater.from(parent.context))
+            TodoRecycleviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: TodoRecyclerViewHolder, position: Int) {
-        holder.todoItemText.text = itemList[position].title
-        holder.todoItemSubText.text = itemList[position].content
+        val data = itemList[position]
+        holder.bind(data)
     }
 }

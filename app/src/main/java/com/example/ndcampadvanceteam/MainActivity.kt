@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ndcampadvanceteam.adapter.MainViewPagerAdapter
 import com.example.ndcampadvanceteam.databinding.MainActivityBinding
+import com.example.ndcampadvanceteam.model.MainTabsModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -16,30 +17,46 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MainActivity : AppCompatActivity() {
     // viewBinding
     private lateinit var binding: MainActivityBinding
-    // widget
-    private val mainToolbar: Toolbar by lazy { binding.mainToolbar }
-    private val mainTabLayout: TabLayout by lazy { binding.mainTabLayout }
-    private val mainViewPager: ViewPager2 by lazy { binding.mainViewPager }
-    private val mainFloatingButton: FloatingActionButton by lazy { binding.mainFloatingButton }
+
     // other
     private lateinit var todoAddLauncher: ActivityResultLauncher<Intent>
-    private val mainViewPagerAdapter = MainViewPagerAdapter(supportFragmentManager, lifecycle)
+    private val mainViewPagerAdapter by lazy {
+        MainViewPagerAdapter(
+            this@MainActivity
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initView()
+        mainViewPagerChanged()
+        addTodoItem()
+    }
+
+    private fun initView() = with(binding) {
+        mainViewPagerAdapter.addTabList(
+            MainTabsModel(
+                TodoFragment.newInstance(),
+                R.string.main_todo_title
+            )
+        )
+        mainViewPagerAdapter.addTabList(
+            MainTabsModel(
+                BookmarkFragment.newInstance(),
+                R.string.main_bookmark_title
+            )
+        )
         mainViewPager.adapter = mainViewPagerAdapter    // connect adapter
         TabLayoutMediator(mainTabLayout, mainViewPager) { tab, pos ->   // set tabLayout title
             tab.text = getString(mainViewPagerAdapter.getTitleByIndex(pos))
         }.attach()
         mainToolbar.title = "Camp"  // set toolbar title
-        mainViewPagerChanged()
         mainFloatingButton.setOnClickListener { mainFloatingButtonClickEvent() }
-        addTodoItem()
     }
 
-    private fun addTodoItem() {
+    private fun addTodoItem() = with(binding) {
         todoAddLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
@@ -52,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    private fun mainViewPagerChanged() {
+    private fun mainViewPagerChanged() = with(binding) {
         mainViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
@@ -62,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 //                if (position == 1) {
 //                    mainFloatingButton.hide()
 //                }
-                val nFragment=mainViewPagerAdapter.getFragmentByIndex(position)
+                val nFragment = mainViewPagerAdapter.getFragmentByIndex(position)
                 if (nFragment is TodoFragment) {
                     mainFloatingButton.show()
                 }

@@ -17,13 +17,22 @@ class TodoAddActivity : AppCompatActivity() {
         binding.todoAddSuccessButton.setOnClickListener { addTodoSuccess() }
     }
 
-    private fun addTodoSuccess() {
+    private fun addTodoSuccess(): Unit? {
 //        val intent = Intent(this@TodoAddActivity, MainActivity::class.java)
+        if (binding.todoAddTitleEdit.text.isNullOrBlank()){
+            binding.todoAddTitleEdit.requestFocus()
+            return null
+        }
+        if (binding.todoAddContentEdit.text.isNullOrBlank()){
+            binding.todoAddTitleEdit.requestFocus()
+            return null
+        }
         val intent = Intent()
         intent.putExtra("title", binding.todoAddTitleEdit.text.toString())
         intent.putExtra("content", binding.todoAddContentEdit.text.toString())
         setResult(RESULT_OK, intent)
         finish()
+        return null
     }
 
     private fun setToolbar() {
