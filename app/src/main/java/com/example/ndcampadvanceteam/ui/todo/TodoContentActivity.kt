@@ -1,35 +1,56 @@
-package com.example.ndcampadvanceteam
+package com.example.ndcampadvanceteam.ui.todo
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import com.example.ndcampadvanceteam.R
 import com.example.ndcampadvanceteam.databinding.TodoAddActivityBinding
+import com.example.ndcampadvanceteam.model.TodoModel
 
-class TodoAddActivity : AppCompatActivity() {
+class TodoContentActivity : AppCompatActivity() {
 
     private lateinit var binding: TodoAddActivityBinding
+
+    companion object {
+        const val EXTRA_TODO_MODEL = "extra_todo_model"
+        fun newIntentForAdd(
+            context: Context,
+        ) = Intent(context, TodoContentActivity::class.java).apply {
+        }
+
+        fun newIntentForEdit(
+            context: Context,
+            position: Int,
+            data: TodoModel,
+        ) = Intent(context, TodoContentActivity::class.java).apply {
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = TodoAddActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setToolbar()
-        binding.todoAddSuccessButton.setOnClickListener { addTodoSuccess() }
+        binding.todoSubmit.setOnClickListener { addTodoSuccess() }
     }
 
-    private fun addTodoSuccess(): Unit? {
+    private fun addTodoSuccess(): Unit? = with(binding) {
 //        val intent = Intent(this@TodoAddActivity, MainActivity::class.java)
-        if (binding.todoAddTitleEdit.text.isNullOrBlank()){
-            binding.todoAddTitleEdit.requestFocus()
+        if (todoTitle.text.isNullOrBlank()) {
+            todoTitle.requestFocus()
             return null
         }
-        if (binding.todoAddContentEdit.text.isNullOrBlank()){
-            binding.todoAddTitleEdit.requestFocus()
+        if (todoContent.text.isNullOrBlank()) {
+            todoContent.requestFocus()
             return null
         }
         val intent = Intent()
-        intent.putExtra("title", binding.todoAddTitleEdit.text.toString())
-        intent.putExtra("content", binding.todoAddContentEdit.text.toString())
+        intent.putExtra(
+            EXTRA_TODO_MODEL,
+            TodoModel(todoTitle.text.toString(), todoContent.text.toString())
+        )
         setResult(RESULT_OK, intent)
         finish()
         return null

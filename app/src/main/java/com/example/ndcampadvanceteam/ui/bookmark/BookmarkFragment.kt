@@ -1,4 +1,4 @@
-package com.example.ndcampadvanceteam
+package com.example.ndcampadvanceteam.ui.bookmark
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

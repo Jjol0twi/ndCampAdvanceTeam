@@ -1,17 +1,18 @@
-package com.example.ndcampadvanceteam
+package com.example.ndcampadvanceteam.ui.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.example.ndcampadvanceteam.R
+import com.example.ndcampadvanceteam.ui.todo.TodoContentActivity
+import com.example.ndcampadvanceteam.ui.todo.TodoFragment
 import com.example.ndcampadvanceteam.adapter.MainViewPagerAdapter
 import com.example.ndcampadvanceteam.databinding.MainActivityBinding
 import com.example.ndcampadvanceteam.model.MainTabsModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.tabs.TabLayout
+import com.example.ndcampadvanceteam.ui.bookmark.BookmarkFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(mainTabLayout, mainViewPager) { tab, pos ->   // set tabLayout title
             tab.text = getString(mainViewPagerAdapter.getTitleByIndex(pos))
         }.attach()
-        mainToolbar.title = "Camp"  // set toolbar title
+        mainToolbar.title = getString(R.string.main_toolbar_title)
         mainFloatingButton.setOnClickListener { mainFloatingButtonClickEvent() }
     }
 
@@ -60,8 +61,7 @@ class MainActivity : AppCompatActivity() {
         todoAddLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
-                    val title = result.data?.getStringExtra("title") ?: ""
-                    val content = result.data?.getStringExtra("content") ?: ""
+                    val data =
                     val getTodoInstance =
                         mainViewPagerAdapter.getFragmentByIndex(mainViewPager.currentItem) as TodoFragment
                     getTodoInstance.setItemData(title, content)
@@ -86,13 +86,12 @@ class MainActivity : AppCompatActivity() {
                 if (nFragment is BookmarkFragment) {
                     mainFloatingButton.hide()
                 }
-
             }
         })
     }
 
     private fun mainFloatingButtonClickEvent() {
-        val intent = Intent(this, TodoAddActivity::class.java)
+        val intent = Intent(this, TodoContentActivity::class.java)
         todoAddLauncher.launch(intent)
     }
 }

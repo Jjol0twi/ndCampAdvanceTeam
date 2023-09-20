@@ -7,4 +7,5 @@
     <string name="todo_add_title_hint">제목</string>
     <string name="todo_add_button_text">등록</string>
     <string name="todo_add_activity_title">할 일</string>
+    <string name="main_toolbar_title">Camp</string>
 </resources>
